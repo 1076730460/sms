@@ -1,0 +1,13 @@
+spring:
+  server:
+    port: 8080
+  rabbitmq:
+    host: master.main.rabbitmq.service.ch999.com
+    port: 5672
+    username: rabbitmq
+    password: rabbitmq999
+    publisher-confirms: true    #  消息发送到交换机确认机制,是否确认回调
+    publisher-returns: true
+    template:
+      mandatory: true
+    virtual-host: rabbitmq
