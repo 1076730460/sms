@@ -20,4 +20,11 @@ public class SmsApplicationTests {
     public void contextLoads() {
     }
 
+    @Test
+    public void sendMsgTest(){
+        String uuid = UUID.randomUUID().toString();
+        StringBuilder sb  = new StringBuilder("hell----");
+        sendMessage.send(uuid,sb);
+    }
+
 }

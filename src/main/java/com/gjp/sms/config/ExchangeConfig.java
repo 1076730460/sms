@@ -2,12 +2,14 @@ package com.gjp.sms.config;
 
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * 消息交换机配置  可以配置多个
  * @author gengjiaping
  * @date  2019-4-16
  */
+@Configuration
 public class ExchangeConfig {
 
 /**
