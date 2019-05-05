@@ -7,3 +7,17 @@ spring:
     username: rabbitmq-gjp
     password: rabbitmq-gjp
     publisher-confirms: true
+  mail:
+    host: smtp.qq.com
+    username: 1076730460@qq.com
+    password: rmrbqcfriptgjchi
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+mail:
+  from: ${spring.mail.username}
+  to: yyyyyy@qq.com
