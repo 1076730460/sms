@@ -1,5 +1,6 @@
 package com.gjp.sms;
 
+import com.gjp.sms.common.util.HttpClientUtil;
 import com.gjp.sms.message.SendMessage;
 import com.gjp.sms.service.MailService;
 import org.junit.Test;
@@ -11,6 +12,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -49,6 +53,10 @@ public class SmsApplicationTests {
         mailService.sendSimpleMail("599437680@qq.com","测试Springboot发送邮件", "发送邮件测试内容.....");
     }
 
+    /**
+     * 带图片和附件及html邮件
+     * @throws MessagingException
+     */
     @Test
     public void sendHtmlMailTest() throws MessagingException {
 
@@ -58,6 +66,18 @@ public class SmsApplicationTests {
 
         mailService.sendHtmlMail("599437680@qq.com","测试Springboot发送带附件的邮件", "欢迎进入<a href=\"http://www.baidu.com\">百度首页</a>", attachmentMap);
 
+    }
+
+    @Test
+    public void sendSmsTest(){
+        DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sendtime = format1.format(new Date());
+        Map<String, String> param = new HashMap<>();
+        param.put("phones", "18108753351");
+        param.put("content", "测试短信");
+        param.put("sendtime", sendtime);
+       param.put("server", "http://sms.webchinese.cn/web_api/");
+        String smsRet = HttpClientUtil.post("http://sms.webchinese.cn/web_api/", param);
     }
 
 }
