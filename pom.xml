@@ -80,7 +80,25 @@
             <artifactId>fluent-hc</artifactId>
             <version>4.5.5</version>
         </dependency>
+        <!--短信发送测试start-->
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.1.1</version>
+            </dependency>
 
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>3.0.1</version>
+            </dependency>
+        <!--短信发送测试end-->
     </dependencies>
 
     <build>
