@@ -2,6 +2,7 @@ package com.gjp.sms.api;
 
 import com.gjp.sms.service.MailService;
 import com.gjp.sms.vo.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/sendmail")
+@Slf4j
 public class SendMailApi {
 
    @Resource
@@ -35,9 +37,10 @@ public class SendMailApi {
        try {
            mailService.sendSimpleMail(sendTo,subject,msg);
        }catch (Exception e){
-           return Result.error("发送失败");
+           log.error("发送邮件失败");
+           return Result.error("发送邮件失败");
        }
-       return Result.success("发送成功");
+       return Result.success("发送邮件成功");
    }
 
     /**
@@ -54,9 +57,10 @@ public class SendMailApi {
        try {
            mailService.sendHtmlMail(sendTo,subject,msg,attachmentMap);
        }catch (Exception e){
-           return Result.error("发送失败");
+           log.error("发送邮件失败");
+           return Result.error("发送邮件失败");
        }
-       return Result.success("发送成功");
+       return Result.success("发送邮件成功");
    }
 
 }

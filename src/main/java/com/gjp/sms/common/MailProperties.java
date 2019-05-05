@@ -1,5 +1,6 @@
 package com.gjp.sms.common;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -8,25 +9,10 @@ import org.springframework.stereotype.Component;
  * @author gengjiaping
  * @date 2019-05-05
  */
+@Data
 @Component
 @ConfigurationProperties(prefix = "mail")
 public class MailProperties {
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
     private String from;
 
     private String to;
