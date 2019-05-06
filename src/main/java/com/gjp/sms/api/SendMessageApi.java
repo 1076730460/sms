@@ -1,12 +1,12 @@
 package com.gjp.sms.api;
-
-import com.gjp.sms.config.RabbitMqConfig;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
 @RestController
@@ -18,19 +18,21 @@ public class SendMessageApi {
 
     /**
      *
-     * @param uuid
      * @param message
      */
-    public void send(String uuid,Object message) {
-        CorrelationData correlationId = new CorrelationData(uuid);
-        rabbitTemplate.convertAndSend(RabbitMqConfig.EXCHANGE, RabbitMqConfig.ROUTINGKEY1,
-                message, correlationId);
+    public void send(Object message) {
+        try {
+            rabbitTemplate.convertAndSend("mail.exchange.name", "mail.routing.key.name",
+                    MessageBuilder.withBody((message.toString()).getBytes("utf-8")).build());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        // rabbitTemplate.convertAndSend("first-queue",message);
     }
 
    @RequestMapping(value = "/sendMsgtest")
     public void sendMsgTest(){
-        String uuid = UUID.randomUUID().toString();
-        send(uuid,"123");
+        send("邮件测试");
     }
 
 

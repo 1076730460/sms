@@ -13,14 +13,28 @@ import org.springframework.context.annotation.Configuration;
 public class QueueConfig {
 
 
+    /**
+     * 发送邮件队列
+     * @return
+     */
     @Bean
-    public Queue queue(){
+    public Queue mailQueue(){
         /**
          durable="true" 持久化 rabbitmq重启的时候不需要创建新的队列
          auto-delete 表示消息队列没有在使用时将被自动删除 默认是false
          exclusive  表示该消息队列是否只在当前connection生效,默认是false
          */
-       // return  new Queue("queue-1",true,false,false);
-        return  new Queue("queue-1");
+       return  new Queue("mail.queue.name",true);
     }
+
+    @Bean(name="messags")
+    public Queue queueMessages(){
+        /**
+         durable="true" 持久化 rabbitmq重启的时候不需要创建新的队列
+         auto-delete 表示消息队列没有在使用时将被自动删除 默认是false
+         exclusive  表示该消息队列是否只在当前connection生效,默认是false
+         */
+        return  new Queue("topic.messages");
+    }
+
 }

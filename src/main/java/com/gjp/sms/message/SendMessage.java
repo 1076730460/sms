@@ -1,6 +1,7 @@
 package com.gjp.sms.message;
 
 import com.gjp.sms.config.RabbitMqConfig;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.stereotype.Component;
@@ -21,12 +22,11 @@ public class SendMessage {
 
     /**
      *
-     * @param uuid
      * @param message
      */
-    public void send(String uuid,Object message) {
-        CorrelationData correlationId = new CorrelationData(uuid);
-        rabbitTemplate.convertAndSend( "queue-1",
+    @RabbitListener(queues="topic.message")
+    public void send(Object message) {
+        rabbitTemplate.convertAndSend("exchang", "topic.message",
                 message);
     }
 
